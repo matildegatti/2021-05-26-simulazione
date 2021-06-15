@@ -76,8 +76,14 @@ public class FXMLController {
     	}
     	
     	List<Business> list=this.model.calcolaPercorso(b,x);
+    	
+    	if(list==null) {
+    		this.txtResult.setText("Non esiste un percorso");
+    	}
+    	else {
     	for(Business bus:list) {
     		this.txtResult.appendText(bus.getBusinessName()+"\n");
+    	}
     	}
     }
 

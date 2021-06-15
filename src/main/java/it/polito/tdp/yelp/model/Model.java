@@ -95,7 +95,7 @@ public class Model {
 	}
 
 	public List<Business> calcolaPercorso(Business b, double x) {
-		percorsoMigliore=new LinkedList<Business>();
+		percorsoMigliore=null;
 		lunghezza=Integer.MAX_VALUE;
 		
 		List<Business> parziale=new LinkedList<Business>();
@@ -117,11 +117,13 @@ public class Model {
 		
 		for(DefaultWeightedEdge e:this.grafo.outgoingEdgesOf(business)) {
 			double peso=this.grafo.getEdgeWeight(e);
-			Business b=grafo.getEdgeTarget(e);
+			Business b=Graphs.getOppositeVertex(grafo, e, business);
 			if(peso>=x) {
+				if(!parziale.contains(b)) {
 				parziale.add(b);
 				cerca(parziale,x,b);
 				parziale.remove(parziale.size()-1);
+				}
 			}
 		}
 	}
